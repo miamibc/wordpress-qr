@@ -18,9 +18,9 @@ You can put shortcode `[qr]` in your post to display QR code with address of you
 # Features #
 
 * Shortcode `[qr]` for QR code with current page
-* `[qr link#"..."]` for any link
-* `[qr size#"100"]` 100/200/300 is a size of QR code
-* `[qr style#"width: 100%; height: auto;"]` to add any style to image
+* `[qr link="..."]` for any link
+* `[qr size="100"]` 100/200/300 is a size of QR code
+* `[qr style="width: 100%; height: auto;"]` to add any style to image
 * Cached image, only one request to Google server per address
 * (removed) link shortening is not available for now, because of absence with persising cache.
 
