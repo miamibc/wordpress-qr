@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Wordpress QR
-Plugin URI: http://www.blackcrystal.net/project/wordpress-qr/
-Description: Adds QR code to admin screens of all post types, adds [qr] shortcode
+Plugin Name: QR shortcode
+Plugin URI: http://www.blackcrystal.net/project/qr-shortcode/
+Description: Plugin adds [qr] shortcode and shows QR image in admin pages of all post types.
 Version: 1.0
 Author: Sergei Miami <miami@blackcrystal.net>
 Author URI: http://www.blackcrystal.net
@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class wordpressqr
+class qrshortcode
 {
 
 	private static $instance = null;
@@ -39,17 +39,28 @@ class wordpressqr
 		return self::$instance;
 	}
 
+  /**
+   * qrshortcode constructor forbidden
+   * @use qrshortcode::init()
+   */
 	private function __construct()
 	{
 		add_shortcode( 'qr', array($this,'add_shortcode'));
 		add_action( 'add_meta_boxes', array($this,'add_metaboxes'));
 	}
 
+  /**
+   * Adds metaboxes
+   */
 	public function add_metaboxes()
 	{
-		add_meta_box('wordpress-qr', 'QR code', array($this,'render_metaboxes'), null, 'side', 'low');
+		add_meta_box('qr-shortcode', 'QR code', array($this,'render_metaboxes'), null, 'side', 'low');
 	}
 
+  /**
+   * Render QR metabox min admin page
+   * @param $post
+   */
 	public function render_metaboxes( $post )
 	{
 		if (get_post_status($post) != 'publish')
@@ -60,6 +71,11 @@ class wordpressqr
 		echo do_shortcode('[qr style="width: 100%; height: auto;"]');
 	}
 
+  /**
+   * Adds shortcode
+   * @param $atts
+   * @return string
+   */
 	public function add_shortcode( $atts )
 	{
 		$atts = shortcode_atts( array(
@@ -77,9 +93,15 @@ class wordpressqr
 		return '<img src="'.$this->get_cached_qr_url($url).'" style="'.$atts['style'].'">';
 	}
 
+  /**
+   * Unused method because need to cache url somehow
+   *         (too many requests to google API)
+   * @param $url
+   * @return bool|mixed
+   */
 	private function shorten_link($url)
   {
-    if ($result = wp_cache_get($url, 'wordpress-qr')) return $result;
+    if ($result = wp_cache_get($url, 'qr-shortcode')) return $result;
     $context = stream_context_create(array(
       'http' => array(
         'method'  => 'POST',
@@ -91,7 +113,7 @@ class wordpressqr
 
     $obj   = json_decode($json);
     $result = isset($obj->id) ? $obj->id : $url;
-    wp_cache_set($url, $result, 'wordpress-qr');
+    wp_cache_set($url, $result, 'qr-shortcode');
     return $result;
   }
 
@@ -105,13 +127,13 @@ class wordpressqr
     $dir = wp_get_upload_dir();
     $file = md5($url).'.png';
     $subdir = substr($file,0,2);
-    if (!file_exists($path = "$dir[basedir]/wordpress-qr/$subdir"))
+    if (!file_exists($path = "$dir[basedir]/qr-shortcode/$subdir"))
       wp_mkdir_p($path);
-    if (!file_exists($path = "$dir[basedir]/wordpress-qr/$subdir/$file"))
+    if (!file_exists($path = "$dir[basedir]/qr-shortcode/$subdir/$file"))
       file_put_contents($path, file_get_contents($url)) && chmod($path, 0666);
-    return "$dir[baseurl]/wordpress-qr/$subdir/$file";
+    return "$dir[baseurl]/qr-shortcode/$subdir/$file";
   }
 }
 
 // let's rock!
-add_action( 'plugins_loaded', array('wordpressqr', 'init') );
+add_action( 'plugins_loaded', array('qrshortcode', 'init') );

@@ -1,7 +1,7 @@
-=== Wordpress QR ===
+=== QR shortcode ===
 
 Contributors: miamibc
-Donate link: http://www.blackcrystal.net/project/wordpress-qr/
+Donate link: http://www.blackcrystal.net/project/qr-shortcode/
 Tags: qr, qrcode, qr code, code
 Requires at least: 4.0
 Tested up to: 4.6.1
@@ -33,7 +33,7 @@ You can put shortcode `[qr]` in your post to display QR code with address of you
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/wordpress-qr` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/qr-shortcode` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 
 == Frequently Asked Questions ==

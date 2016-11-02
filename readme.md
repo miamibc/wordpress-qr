@@ -1,7 +1,7 @@
 ### Wordpress QR ###
 
 Contributors: miamibc
-Donate link: http://www.blackcrystal.net/project/wordpress-qr/
+Donate link: http://www.blackcrystal.net/project/qr-shortcode/
 Tags: qr, qrcode, qr code, code
 Requires at least: 4.0
 Tested up to: 4.6.1
@@ -9,7 +9,7 @@ Stable tag: 4.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Plugin adds QR code to admin pages of pages, products and other custom post types
+Plugin adds [qr] shortcode and shows QR image in admin pages of all post types.
 
 ## Description ##
 
@@ -33,7 +33,7 @@ You can put shortcode `[qr]` in your post to display QR code with address of you
 
 ## Installation ##
 
-1. Upload the plugin files to the `/wp-content/plugins/wordpress-qr` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/qr-shortcode` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 
 
