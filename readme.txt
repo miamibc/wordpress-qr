@@ -51,6 +51,3 @@ No questions for now
 
 = 1.0 =
 * Initial version
-
-= 1.1 =
-* Added support of wholesale price from [WooCommerce Wholesale Prices](https://wholesalesuiteplugin.com)
